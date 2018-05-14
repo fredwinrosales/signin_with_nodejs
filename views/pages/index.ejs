@@ -1,0 +1,96 @@
+<!-- views/pages/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>Bienvenido a Vendy</h1>
+        <p>Para registrarte debes completar el siguiente formulario</p>
+    </div>
+</main>
+
+<form method="post" action="/sign-in">
+    <div class="form-group">
+        <label for="name">Nombre</label>
+        <input type="text" class="form-control" name="name" maxlength="60" required>
+    </div>
+    <div class="form-group">
+        <label for="surname">Apellido</label>
+        <input type="text" class="form-control" name="surname" maxlength="60" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" name="email" maxlength="100" required>
+    </div>
+    <div class="form-group">
+        <label for="phone">Telefono</label>
+        <input type="text" class="form-control" name="phone" maxlength="11" required>
+    </div>
+    <h5>Direccion:</h5>
+    <div class="form-group">
+        <label for="street">Calle</label>
+        <input type="text" class="form-control" name="street" maxlength="60" required>
+    </div>
+    <div class="form-group">
+        <label for="city">Ciudad</label>
+        <input type="text" class="form-control" name="city" maxlength="60" required>
+    </div>
+    <div class="form-group">
+        <label for="state">Estado</label>
+        <input type="text" class="form-control" name="state" maxlength="60" required>
+    </div>
+    <div class="form-group">
+        <label for="zip_code">Zip</label>
+        <input type="text" class="form-control" name="zip_code" maxlength="10" required>
+    </div>
+    <div class="form-group">
+        <label for="car_type">Tipo de carro</label>
+        <input type="text" class="form-control" name="car_type" maxlength="60" required>
+    </div>
+    <div class="form-group">
+        <label for="year_car">Ano del carro</label>
+        <input type="text" class="form-control" name="year_car" maxlength="4" required>
+    </div>
+    <h5>Tarjeta de credito/debito</h5>
+    <div class="form-group">
+        <label for="number">Numero</label>
+        <input type="text" class="form-control" name="number" maxlength="20" required>
+    </div>
+    <div class="form-group">
+        <label for="exp_date">Fecha de expiracion</label>
+        <input type="text" class="form-control" name="exp_date" maxlength="4" required>
+    </div>
+    <div class="form-group">
+        <label for="cvv">CVV</label>
+        <input type="text" class="form-control" name="cvv" maxlength="3" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar formulario</button>
+</form>
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+<script>
+    $(function(){
+        var success = '<%=success%>';
+        if(success != ''){
+            $('#exampleModal').modal();
+        }
+    });
+</script>
+
+</body>
+</html>
