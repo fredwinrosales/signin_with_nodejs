@@ -32,7 +32,7 @@
     </div>
     <div class="form-group">
         <label for="phone">Telefono</label>
-        <input type="text" class="form-control" name="phone" maxlength="11" required>
+        <input type="text" class="form-control" name="phone" maxlength="13" required>
     </div>
     <h5>Direccion:</h5>
     <div class="form-group">
@@ -85,10 +85,17 @@
 
 <script>
     $(function(){
-        var success = '<%=success%>';
-        if(success != ''){
-            $('#exampleModal').modal();
-        }
+
+        <% if(parseInt(rc) == 0){ %>
+
+            $('#success').modal();
+
+        <% }else if(parseInt(rc) < 0){ %>
+
+            $('#error').modal();
+
+        <% } %>
+
     });
 </script>
 

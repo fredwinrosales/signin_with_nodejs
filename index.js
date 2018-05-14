@@ -19,7 +19,7 @@ app.use(session({cookie: { maxAge: 60000 }}));
 app.use(flash());
 
 app.use('/', portal);
-app.use('/api/v1/', apis);
+app.use('/api/v1', apis);
 
 app.listen(3000);
 console.log('3000 is the magic port');
