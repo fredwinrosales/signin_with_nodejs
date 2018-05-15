@@ -60,10 +60,69 @@ exports.api = function(data, callback) {
         var args = {
 
             headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            data: data
+        };
+
+        client.post(route, args, function (data, response) {
+
+            fulfill({ data: data, status: response.statusCode });
+
+        });
+    });
+};
+
+exports.braintree_customer = function(data, callback) {
+
+    return new Promise(function (fulfill, reject){
+
+        var route = properties.get('api.base')+"/braintree/customer";
+        
+        var args = {
+
+            headers: {
                 "Content-Type":"application/json",
                 "Accept":"application/json"
             },
-            data: data
+            data: {
+                "first_name": data.name,
+                "last_name": data.surname,
+                "company": null,
+                "email": data.email,
+                "phone": null,
+                "fax": null,
+                "website": null
+            }
+        };
+
+        client.post(route, args, function (data, response) {
+
+            fulfill({ data: data, status: response.statusCode });
+
+        });
+    });
+};
+
+exports.braintree_credircard = function(customer_id, data, callback) {
+
+    return new Promise(function (fulfill, reject){
+
+        var route = properties.get('api.base')+"/braintree/creditcard";
+        
+        var args = {
+
+            headers: {
+                "Content-Type":"application/json",
+                "Accept":"application/json"
+            },
+            data: {
+                "customer_id": customer_id,
+                "card_number": data.number,
+                "exp_date": data.exp_date,
+                "cvv": data.cvv
+            }
         };
 
         client.post(route, args, function (data, response) {
