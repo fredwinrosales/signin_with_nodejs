@@ -18,90 +18,27 @@
 </main>
 
 <form method="post" action="/sign-in">
-    <div class="form-group">
-        <label for="name">Nombre
-            <small><%-(typeof validation[0] != 'undefined' && typeof validation[0]['name'] != 'undefined') ? validation[0]['name']['msg'] : ''%></small>
-        </label>
-        <input type="text" 
-               class="form-control" 
-               name="name" 
-               maxlength="60" 
-               value="<%-(typeof old[0] != 'undefined') ? old[0]['name'] : ''%>">
-    </div>
-    <div class="form-group">
-        <label for="surname">Apellido
-            <small><%-(typeof validation[0] != 'undefined' && typeof validation[0]['surname'] != 'undefined') ? validation[0]['surname']['msg'] : ''%></small>
-        </label>
-        <input type="text" class="form-control" name="surname" maxlength="60" value="<%-(typeof old[0] != 'undefined') ? old[0]['surname'] : ''%>">
-    </div>
-    <div class="form-group">
-        <label for="email">Email
-            <small><%-(typeof validation[0] != 'undefined' && typeof validation[0]['email'] != 'undefined') ? validation[0]['email']['msg'] : ''%></small> 
-        </label>
-        <input type="text" class="form-control" name="email" maxlength="100" value="<%-(typeof old[0] != 'undefined') ? old[0]['email'] : ''%>">
-    </div>
-    <div class="form-group">
-        <label for="phone">Telefono
-            <small><%-(typeof validation[0] != 'undefined' && typeof validation[0]['phone'] != 'undefined') ? validation[0]['phone']['msg'] : ''%></small> 
-        </label>
-        <input type="text" class="form-control" name="phone" maxlength="13" value="<%-(typeof old[0] != 'undefined') ? old[0]['phone'] : ''%>">
-    </div>
-    <h5>Direccion:</h5>
-    <div class="form-group">
-        <label for="street">Calle
-            <small><%-(typeof validation[0] != 'undefined' && typeof validation[0]['street'] != 'undefined') ? validation[0]['street']['msg'] : ''%></small> 
-        </label>
-        <input type="text" class="form-control" name="street" maxlength="60" value="<%-(typeof old[0] != 'undefined') ? old[0]['street'] : ''%>">
-    </div>
-    <div class="form-group">
-        <label for="city">Ciudad
-            <small><%-(typeof validation[0] != 'undefined' && typeof validation[0]['city'] != 'undefined') ? validation[0]['city']['msg'] : ''%></small> 
-        </label>
-        <input type="text" class="form-control" name="city" maxlength="60" value="<%-(typeof old[0] != 'undefined') ? old[0]['city'] : ''%>">
-    </div>
-    <div class="form-group">
-        <label for="state">Estado
-            <small><%-(typeof validation[0] != 'undefined' && typeof validation[0]['state'] != 'undefined') ? validation[0]['state']['msg'] : ''%></small> 
-        </label>
-        <input type="text" class="form-control" name="state" maxlength="60" value="<%-(typeof old[0] != 'undefined') ? old[0]['state'] : ''%>">
-    </div>
-    <div class="form-group">
-        <label for="zip_code">Zip
-            <small><%-(typeof validation[0] != 'undefined' && typeof validation[0]['zip_code'] != 'undefined') ? validation[0]['zip_code']['msg'] : ''%></small> 
-        </label>
-        <input type="text" class="form-control" name="zip_code" maxlength="10" value="<%-(typeof old[0] != 'undefined') ? old[0]['zip_code'] : ''%>">
-    </div>
-    <div class="form-group">
-        <label for="car_type">Tipo de carro
-            <small><%-(typeof validation[0] != 'undefined' && typeof validation[0]['car_type'] != 'undefined') ? validation[0]['car_type']['msg'] : ''%></small> 
-        </label>
-        <input type="text" class="form-control" name="car_type" maxlength="60" value="<%-(typeof old[0] != 'undefined') ? old[0]['car_type'] : ''%>">
-    </div>
-    <div class="form-group">
-        <label for="year_car">Ano del carro
-            <small><%-(typeof validation[0] != 'undefined' && typeof validation[0]['year_car'] != 'undefined') ? validation[0]['year_car']['msg'] : ''%></small> 
-        </label>
-        <input type="text" class="form-control" name="year_car" maxlength="4" value="<%-(typeof old[0] != 'undefined') ? old[0]['year_car'] : ''%>">
-    </div>
-    <h5>Tarjeta de credito/debito</h5>
-    <div class="form-group">
-        <label for="number">Numero
-            <small><%-(typeof validation[0] != 'undefined' && typeof validation[0]['number'] != 'undefined') ? validation[0]['number']['msg'] : ''%></small> 
-        </label>
-        <input type="text" class="form-control" name="number" maxlength="20" value="<%-(typeof old[0] != 'undefined') ? old[0]['number'] : ''%>">
-    </div>
-    <div class="form-group">
-        <label for="exp_date">Fecha de expiracion
-            <small><%-(typeof validation[0] != 'undefined' && typeof validation[0]['exp_date'] != 'undefined') ? validation[0]['exp_date']['msg'] : ''%></small> 
-        </label>
-        <input type="text" class="form-control" name="exp_date" maxlength="4" value="<%-(typeof old[0] != 'undefined') ? old[0]['exp_date'] : ''%>">
-    </div>
-    <div class="form-group">
-        <label for="cvv">CVV
-            <small><%-(typeof validation[0] != 'undefined' && typeof validation[0]['cvv'] != 'undefined') ? validation[0]['cvv']['msg'] : ''%></small> 
-        </label>
-        <input type="text" class="form-control" name="cvv" maxlength="3" value="<%-(typeof old[0] != 'undefined') ? old[0]['cvv'] : ''%>">
-    </div>
+    <% fields.forEach(function(value) { %>
+        <% if(value.type == "h5"){ %>
+            <h5><%-value.title%>
+                <small style="color: #dc3545"><%-(typeof validation[0] != 'undefined' && typeof validation[0][value.msg] != 'undefined') ? validation[0][value.msg]['msg'] : ''%></small>
+            </h5>
+        <% } else { %>
+            <div class="form-group">
+                <label for="<%=value.name%>"><%-value.title%>
+                    <% if(value.msg != null){ %>
+                        <small style="color: #dc3545"><%-(typeof validation[0] != 'undefined' && typeof validation[0][value.msg] != 'undefined') ? validation[0][value.msg]['msg'] : ''%></small>
+                    <% } %>
+                </label>
+                <input type="text" 
+                    class="form-control" 
+                    name="<%=value.name%>" 
+                    maxlength="<%=value.maxlength%>" 
+                    value="<%-(typeof old[0] != 'undefined') ? old[0][value.name] : ''%>" 
+                    placeholder="<%-value.placeholder%>">
+            </div>
+        <% } %>
+    <% }); %>
     <button type="submit" class="btn btn-primary">Enviar formulario</button>
 </form>
 
