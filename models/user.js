@@ -25,6 +25,19 @@ exports.list = function(callback) {
     });
 };
 
+exports.findUserByEmail = function(value, callback) {
+
+    new User().where({ email: value }).fetch().then(function(user) {
+
+        callback(null, user)
+
+    }).catch(function(err) {
+
+        callback(err, null)
+
+    });
+};
+
 exports.store = function(req, callback) {
 
     new User(req).save().then(function(user) {
